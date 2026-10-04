@@ -271,9 +271,10 @@ class GeminiProvider:
         if not candidates:
             raise ProviderError(f"no candidates returned: {json.dumps(data)[:400]}")
         parts = (candidates[0].get("content") or {}).get("parts") or []
-        text = "".join(part.get("text", "") for part in parts if "text" in part).strip()
+        visible = [part for part in parts if not part.get("thought")]
+        text = "".join(part.get("text", "") for part in visible if "text" in part).strip()
         calls: list[ToolCall] = []
-        for index, part in enumerate(parts):
+        for index, part in enumerate(visible):
             function_call = part.get("functionCall")
             if function_call:
                 calls.append(

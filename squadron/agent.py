@@ -5,6 +5,7 @@ from __future__ import annotations
 from dataclasses import dataclass
 
 from .events import EventLog
+from .providers import ProviderError
 from .tools import Toolbox
 
 
@@ -57,6 +58,11 @@ class Agent:
                 tool_calls=[call.name for call in completion.tool_calls],
             )
             if not completion.tool_calls:
+                if not completion.text.strip():
+                    raise ProviderError(
+                        "provider returned neither text nor tool calls; "
+                        "increase SQUADRON_MAX_TOKENS or check the model"
+                    )
                 final = completion.text
                 break
             messages.append(
