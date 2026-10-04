@@ -72,6 +72,10 @@ Fill in one provider key and a model identifier:
 | `SQUADRON_MAX_TOKENS` | Max tokens per request for providers that require it (default 4096) |
 | `SQUADRON_ENV_FILE` | Optional path to an extra env file to load |
 
+The project `.env` is the authoritative local configuration: its values win
+over inherited environment variables. Files referenced by `SQUADRON_ENV_FILE`
+follow the usual rule and never override what is already set.
+
 ## Usage
 
 ```bash

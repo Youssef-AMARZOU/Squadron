@@ -15,7 +15,7 @@ PROVIDER_ENV_KEYS = {
 }
 
 
-def load_env_file(path: Path) -> None:
+def load_env_file(path: Path, override: bool = False) -> None:
     if not path.is_file():
         return
     for raw_line in path.read_text(encoding="utf-8").splitlines():
@@ -25,15 +25,18 @@ def load_env_file(path: Path) -> None:
         key, _, value = line.partition("=")
         key = key.strip()
         value = value.strip().strip('"').strip("'")
-        if key and key not in os.environ:
+        if key and value and (override or key not in os.environ):
             os.environ[key] = value
 
 
 def load_env() -> None:
-    load_env_file(REPO_ROOT / ".env")
+    # The project .env is the authoritative local configuration and wins over
+    # inherited environment variables; extra files follow the usual rule of
+    # never overriding what is already set.
+    load_env_file(REPO_ROOT / ".env", override=True)
     extra = os.environ.get("SQUADRON_ENV_FILE", "").strip()
     if extra:
-        load_env_file(Path(extra))
+        load_env_file(Path(extra), override=False)
 
 
 def detect_provider(explicit: str | None) -> str:
