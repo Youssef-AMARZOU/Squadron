@@ -7,6 +7,12 @@ final summary with verification results.
 
 Authored by **Youssef AMARZOU**.
 
+## Screenshot
+
+![Squadron status dashboard during a run](docs/images/dashboard.png)
+
+*The status dashboard during a run: the agent roster on the left, the live event feed on the right — lead planning, parallel sub-agents, tool calls, and the final report.*
+
 ## Architecture
 
 | Component | Language | Responsibility |
