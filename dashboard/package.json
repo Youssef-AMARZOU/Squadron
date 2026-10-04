@@ -1,0 +1,11 @@
+{
+  "name": "squadron-dashboard",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Status dashboard for Squadron event logs",
+  "license": "MIT",
+  "scripts": {
+    "start": "node src/server.ts"
+  }
+}
