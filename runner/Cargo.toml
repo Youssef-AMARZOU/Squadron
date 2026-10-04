@@ -1,0 +1,13 @@
+[package]
+name = "sqn-runner"
+version = "0.1.0"
+edition = "2021"
+description = "Workspace-confined tool runner for Squadron"
+license = "MIT"
+
+[dependencies]
+serde_json = "1"
+
+[profile.release]
+strip = true
+panic = "abort"

@@ -1,0 +1,17 @@
+.env
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.coverage
+coverage.xml
+htmlcov/
+.squadron/
+runs/
+runner/target/
+dashboard/node_modules/
+dist/
+build/
+*.egg-info/
+.DS_Store
